@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykhayri <ykhayri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/25 10:59:46 by ykhayri           #+#    #+#             */
-/*   Updated: 2023/12/25 12:21:52 by ykhayri          ###   ########.fr       */
+/*   Created: 2023/12/25 12:08:51 by ykhayri           #+#    #+#             */
+/*   Updated: 2023/12/25 12:39:31 by ykhayri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,24 @@ void	Harl::complain( std::string level ) {
 	std::string init = "DIWE";
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	size_t ind;
-	void (Harl::*complaints[4])() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
 	
 	ind = init.find(level[0]);
 	if (ind != std::string::npos && level == levels[ind])
 	{
-		(this->*complaints[ind])();
+		std::cout << "[ " + level + " ]" << std::endl;
+		switch (ind) {
+			case 0:
+				this->debug();
+			case 1:
+				this->info();
+			case 2:
+				this->warning();
+			case 3:
+				this->error();
+				break ;
+		}
+		
 		return ;
 	}
-	std::cout << "No such level!";
-}
+	std::cout << "[ Probably complaining about insignificant problems ]";
+}	
