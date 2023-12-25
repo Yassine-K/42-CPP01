@@ -6,7 +6,7 @@
 /*   By: ykhayri <ykhayri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 12:08:51 by ykhayri           #+#    #+#             */
-/*   Updated: 2023/12/25 12:39:31 by ykhayri          ###   ########.fr       */
+/*   Updated: 2023/12/25 12:47:57 by ykhayri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,23 @@ void	Harl::complain( std::string level ) {
 	ind = init.find(level[0]);
 	if (ind != std::string::npos && level == levels[ind])
 	{
-		std::cout << "[ " + level + " ]" << std::endl;
 		switch (ind) {
 			case 0:
+				std::cout << "[ DEBUG ]" << std::endl;
 				this->debug();
+				std::cout << std::endl;
 			case 1:
+				std::cout << "[ INFO ]" << std::endl;
 				this->info();
+				std::cout << std::endl;
 			case 2:
+				std::cout << "[ WARNING ]" << std::endl;
 				this->warning();
+				std::cout << std::endl;
 			case 3:
+				std::cout << "[ ERROR ]" << std::endl;
 				this->error();
+				std::cout << std::endl;
 				break ;
 		}
 		
