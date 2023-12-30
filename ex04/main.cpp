@@ -6,7 +6,7 @@
 /*   By: ykhayri <ykhayri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 12:56:54 by ykhayri           #+#    #+#             */
-/*   Updated: 2023/12/25 10:56:50 by ykhayri          ###   ########.fr       */
+/*   Updated: 2023/12/30 09:53:17 by ykhayri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	copyToFile(std::string& s, std::ofstream& output, std::string toFind, std::
 
 	start = 0;
 	findeInd = s.find(toFind, start);
-	while (findeInd != std::string::npos && toFind.length()) {
+	while (toFind.length() && findeInd != std::string::npos) {
 		s = s.substr(0, findeInd) + swp + s.substr(findeInd + toFind.length());
 		start = findeInd + swp.length();
 		findeInd = s.find(toFind, start);
@@ -38,12 +38,15 @@ void	readLines(std::ifstream& file, std::ofstream& output, std::string toFind, s
 		std::getline(file, tmp);
 		if (!file.eof())
 			tmp.push_back('\n');
-		if (s.back() == toFind[0])
+		if (toFind.find("\n", 0) != std::string::npos)
 			s.append(tmp);
-		else
+		else {
 			s = tmp;
-		copyToFile(s, output, toFind, swp);
+			copyToFile(s, output, toFind, swp);
+		}
 	}
+	if (toFind.find("\n", 0) != std::string::npos)
+		copyToFile(s, output, toFind, swp);
 }
 
 int main(int ac, char **av) {
